@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: const Color(0xFF0E1412),
       body: SafeArea(child: _pages[_selectedIndex]),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 25),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
         child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFF141E1B),
@@ -42,33 +42,50 @@ class _MainPageState extends State<MainPage> {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(40),
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.green.shade200.withOpacity(0.5),
-              currentIndex: _selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.fitness_center),
-                  label: 'Oefeningen',
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 10,
+              ), // meer padding binnenin de balk
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent, // verwijdert klikgolf
+                  highlightColor: Colors.transparent, // verwijdert klikglow
+                  hoverColor: Colors.transparent, // verwijdert hover-effect
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart),
-                  label: 'Statistieken',
+                child: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  selectedItemColor: Colors.white,
+                  unselectedItemColor: Colors.green.shade200.withOpacity(0.5),
+                  currentIndex: _selectedIndex,
+                  enableFeedback: false, // geen vibratie of klikgeluid
+                  onTap: (index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.fitness_center),
+                      label: 'Oefeningen',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.bar_chart),
+                      label: 'Statistieken',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.info_outline),
+                      label: 'Privacy',
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.info_outline),
-                  label: 'Privacy',
-                ),
-              ],
+              ),
             ),
           ),
         ),
